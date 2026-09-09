@@ -29,6 +29,9 @@ public class PizzaEntity {
     @Column(columnDefinition = "smallint")
     private Boolean vegetarian;
 
+    @Column(columnDefinition = "smallint")
+    private Boolean vegan;
+
     @Column(columnDefinition = "smallint", nullable = false)
     private Boolean available;
 }
