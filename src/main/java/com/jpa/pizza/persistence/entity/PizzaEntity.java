@@ -26,12 +26,16 @@ public class PizzaEntity {
     @Column(nullable = false, columnDefinition = "Decimal(5,2)")
     private Double price;
 
-    @Column(columnDefinition = "smallint")
+    @Column
     private Boolean vegetarian;
 
-    @Column(columnDefinition = "smallint")
+    @Column
     private Boolean vegan;
 
-    @Column(columnDefinition = "smallint", nullable = false)
+    @Column(nullable = false)
     private Boolean available;
+
+    public Integer getIdPizza() {
+        return idPizza;
+    }
 }
