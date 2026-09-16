@@ -35,7 +35,4 @@ public class PizzaEntity {
     @Column(nullable = false)
     private Boolean available;
 
-    public Integer getIdPizza() {
-        return idPizza;
-    }
 }

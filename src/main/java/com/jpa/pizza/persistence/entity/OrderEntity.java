@@ -44,7 +44,4 @@ public class OrderEntity {
     @JsonIgnore
     private CustomerEntity customer;
 
-    public CustomerEntity getCustomer() {
-        return customer;
-    }
 }
