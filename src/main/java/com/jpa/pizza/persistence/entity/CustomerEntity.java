@@ -30,4 +30,8 @@ public class CustomerEntity {
 
     @Column(name = "phone_number", length = 20)
     private String phoneNumber;
+
+    public String getName() {
+        return name;
+    }
 }

@@ -1,6 +1,8 @@
 package com.jpa.pizza.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -36,5 +38,8 @@ public class OrderItemEntity {
 
     @ManyToOne
     @JoinColumn (name = "id_order", referencedColumnName = "id_order", insertable = false, updatable = false)
+    @JsonIgnore // lo ideal es crear un DTO que simule la clase OrderEntity para no exponer las entidades a traves de un servicio REST
     private OrderEntity order;
+
+
 }
