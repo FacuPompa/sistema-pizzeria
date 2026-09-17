@@ -1,10 +1,12 @@
 package com.jpa.pizza.service;
 
 import com.jpa.pizza.persistence.entity.PizzaEntity;
+import com.jpa.pizza.persistence.repository.PizzaPageSortRepository;
 import com.jpa.pizza.persistence.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,15 +15,18 @@ import java.util.List;
 public class PizzaService {
 
     private final PizzaRepository pizzaRepository;
+    private final PizzaPageSortRepository pizzaPageSortRepository;
 
     @Autowired
-    public PizzaService(PizzaRepository pizzaRepository) {
+    public PizzaService(PizzaRepository pizzaRepository, PizzaPageSortRepository pizzaPageSortRepository) {
         this.pizzaRepository = pizzaRepository;
+        this.pizzaPageSortRepository = pizzaPageSortRepository;
     }
 
 
-    public List<PizzaEntity> getAll() {
-        return this.pizzaRepository.findAll();
+    public Page<PizzaEntity> getAll(int page, int elements) {
+        Pageable pageRequest = PageRequest.of(page, elements);
+        return this.pizzaPageSortRepository.findAll(pageRequest);
     }
 
     public List<PizzaEntity> getAvailable() {
