@@ -2,6 +2,7 @@ package com.jpa.pizza.web.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -13,10 +14,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity httpSecurity){
         httpSecurity.authorizeHttpRequests(http -> http
-                .anyRequest()
-                .authenticated()
+
+                        .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT).denyAll()
+                        .anyRequest().authenticated()
         )
                 .csrf(AbstractHttpConfigurer::disable)
+                .cors(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
         return httpSecurity.build();
     }
